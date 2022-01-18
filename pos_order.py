@@ -1363,6 +1363,7 @@ class ReportSaleDetails(models.AbstractModel):
             payments = []
 
         def calcular_total_costo(costo, cantidad):
+            costo = tasa_vigente * cantidad * costo
             res = costo * cantidad
             return round(res, decimales)
 
@@ -1371,6 +1372,7 @@ class ReportSaleDetails(models.AbstractModel):
             return round(res, decimales)
 
         def calcular_margen(costo, precio_venta, cantidad):
+            costo = tasa_vigente * cantidad * costo
             res = 0
             if cantidad != False:
                 total_costo = calcular_total_costo(costo, cantidad)
@@ -1382,6 +1384,7 @@ class ReportSaleDetails(models.AbstractModel):
             return round(res, decimales)
 
         def calcular_porcentaje_margen(costo, precio_venta, cantidad):
+            costo = tasa_vigente * cantidad * costo
             res = 0
             total_venta = 0
             margen = 0
