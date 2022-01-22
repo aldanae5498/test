@@ -1434,7 +1434,6 @@ class ReportSaleDetails(models.AbstractModel):
 
         return {
             'currency_precision': user_currency.decimal_places,
-            #'total_paid': user_currency.round(total),
             'total_paid': total_venta_bsf,
             'total_paid_usd': round((user_currency.round(total) / tasa_vigente), decimales),
 
