@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+<data>
+<template id="report_saledetails">
+    <t t-set="company" t-value="env.company"/>
+    <t t-call="web.html_container">
+    <t t-call="web.internal_layout">
+        <div class="page">
+
+            <div class="text-center">
+                <h2>Sales Details</h2>
+
+                <strong><t t-esc="date_start" t-options="{'widget': 'datetime'}"/> - <t t-esc="date_stop" t-options="{'widget': 'datetime'}"/></strong>
+            </div>
+
+            <!-- Orderlines -->
+            <h3>Products</h3>
+            <table  class="table table-sm">
+                <thead><tr>
+                    <th>Product</th>
+                    <th>Quantity</th>
+                    <th style="width: 80px!important;">Precio/U</th>
+                    <th style="width: 130px!important;">SubT Venta</th>
+                    <th style="width: 130px!important;">SubT Costo</th>
+                    <th style="width: 120px!important;">Margen</th>
+                </tr></thead>
+                <tbody>
+                <tr t-foreach='products' t-as='line'>
+                    <t t-set="internal_reference" t-value="line['code'] and '[%s] ' % line['code'] or ''" />
+                    <td><t t-esc="internal_reference" /><t t-esc="line['product_name']" /></td>
+                    <td>
+                        <t t-esc="line['quantity']" />
+                        <t t-if='line["uom"] != "Units"'>
+                            <t t-esc='line["uom"]' /> 
+                        </t>
+                    </td>
+                    <td>
+                        <t t-esc='line["price_unit"]' />
+                    <t t-if='line["discount"] != 0'>
+                        Disc: <t t-esc='line["discount"]' />%
+                    </t>
+                    </td>
+                    <td><t t-esc="line['sub_total_venta']" /></td>
+                    <td><t t-esc="line['sub_total_costo']" /></td>
+                    <td><t t-esc="line['margen']"/> (<t t-esc="line['margen_porcentaje']"/> %) </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <br/>
+
+            <h3>Payments</h3>
+            <table  class="table table-sm">
+                <thead><tr>
+                    <th>Name</th>
+                    <th>Total</th>
+                    <th></th>
+                </tr></thead>
+                <tbody>
+                <tr t-foreach='payments' t-as='payment'>
+                    <t t-if="payment['name'] == 'Divisas'">
+                        <td><t t-esc="payment['name']" /></td>
+                        <td><t t-esc="payment['total']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td>$ <t t-esc="round((payment['total'] / tasa_vigente), 2)" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    </t>
+                    <t t-else="">
+                        <td><t t-esc="payment['name']" /></td>
+                        <td><t t-esc="payment['total']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td></td>                    
+                    </t>
+                </tr>
+                </tbody>
+            </table>
+
+            <br/>
+
+            <h3>Taxes</h3>
+            <table  class="table table-sm">
+                <thead><tr>
+                    <th>Name</th>
+                    <th>Tax Amount</th>
+                    <th>Base Amount</th>
+                </tr></thead>
+                <tbody>
+                <tr t-foreach='taxes' t-as='tax'>
+                    <td><t t-esc="tax['name']" /></td>
+                    <td><t t-esc="tax['tax_amount']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    <td><t t-esc="tax['base_amount']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                </tr>
+                </tbody>
+            </table>
+
+            <br/>
+            <br/>
+
+            <h3>Margen</h3>
+            <table  class="table table-sm">
+                <thead>
+                    <tr>
+                        <th>Total Venta</th>
+                        <th>Total Costo</th>
+                        <th>Margen</th>
+                        <th>% Margen</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Bs. <t t-esc='base_amount' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td>Bs. <t t-esc='total_costo_bsf' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td>Bs. <t t-esc='margen_bsf' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td><t t-esc='margen_total_porcentaje' /></td>
+                    </tr>
+                    <tr>
+                        <td>$ <t t-esc='total_paid_usd' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td>$ <t t-esc='total_costo_usd' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td>$ <t t-esc='margen_usd' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td></td>
+                    </tr>  
+                    <tr>
+                        <td>Tasa: $ -> Bs (<t t-esc='tasa_vigente'/>), Bs->$ (<t t-esc='tasa_vigente_usd' />)</td>
+                        <td></td>
+                        <td></td>
+                        <td></td>
+                    </tr>                                        
+                </tbody>
+            </table>
+        </div>
+    </t>
+    </t>
+</template>
+</data>
+</openerp>
