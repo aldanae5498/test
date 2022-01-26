@@ -1404,6 +1404,7 @@ class ReportSaleDetails(models.AbstractModel):
             'code': product.default_code,
             'quantity': qty,
             'price_unit': price_unit,
+            'standard_price': product.standard_price,
 
             'sub_total_costo': calcular_total_costo(product.standard_price, qty),
             'sub_total_venta': calcular_total_venta(price_unit, qty),
