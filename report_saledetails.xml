@@ -43,8 +43,8 @@
                         </t>
                     </td>
                     <td><t t-esc="line['standard_price']" /></td>
-                    <td><t t-esc="line['price_unit'] * line['quantity'] * tasa_vigente" /></td>
-                    <td><t t-esc="line['standard_price'] * line['quantity'] * tasa_vigente" /></td>
+                    <td><t t-esc="line['sub_total_venta']" /></td>
+                    <td><t t-esc="line['sub_total_costo']" /></td>
                     <td><t t-esc="line['margen']"/> (<t t-esc="line['margen_porcentaje']"/> %) </td>
 
                     <t t-set="total_venta" t-value="total_venta+line['sub_total_venta']" />
