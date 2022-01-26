@@ -37,15 +37,15 @@
                         </t>
                     </td>
                     <td>
-                        <t t-esc='line["price_unit"]' />
+                        <t t-esc='line["price_unit"]' t-options="{'widget': 'float', 'precision': currency_precision}"/>
                         <t t-if='line["discount"] != 0'>
                             Disc: <t t-esc='line["discount"]' />%
                         </t>
                     </td>
-                    <td><t t-esc="line['standard_price']" /></td>
-                    <td><t t-esc="line['sub_total_venta']" /></td>
-                    <td><t t-esc="line['sub_total_costo']" /></td>
-                    <td><t t-esc="line['margen']"/> (<t t-esc="line['margen_porcentaje']"/> %) </td>
+                    <td><t t-esc="line['standard_price']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    <td><t t-esc="line['sub_total_venta']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    <td><t t-esc="line['sub_total_costo']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    <td><t t-esc="line['margen']" t-options="{'widget': 'float', 'precision': currency_precision}"/> (<t t-esc="line['margen_porcentaje']" t-options="{'widget': 'float', 'precision': currency_precision}"/> %) </td>
 
                     <t t-set="total_venta" t-value="total_venta+line['sub_total_venta']" />
                 </tr>
@@ -102,7 +102,7 @@
             <table  class="table table-sm">
                 <thead>
                     <tr>
-                        <th>Moneda</th>
+                        <th style="width: 20px!important;">Moneda</th>
                         <th>Total Venta</th>
                         <th>Total Costo</th>
                         <th>Margen</th>
@@ -133,7 +133,7 @@
                         </td>
                     </tr>  
                     <tr>
-                        <td>Tasa: $ -> Bs (<t t-esc='tasa_vigente'/>), Bs->$ (<t t-esc='tasa_vigente_usd' />)</td>
+                        <td>Tasa: $ -> Bs (<t t-esc='tasa_vigente' t-options="{'widget': 'float', 'precision': currency_precision}"/>), Bs->$ (<t t-esc='tasa_vigente_usd' t-options="{'widget': 'float', 'precision': currency_precision}"/>)</td>
                         <td></td>
                         <td></td>
                         <td></td>
