@@ -1367,7 +1367,7 @@ class ReportSaleDetails(models.AbstractModel):
             return round(res, decimales)
 
         def calcular_total_venta(precio_venta, cantidad):
-            res = precio_venta * cantidad
+            res = precio_venta * cantidad * tasa_vigente
             return round(res, decimales)
 
         def calcular_margen(costo, precio_venta, cantidad):
