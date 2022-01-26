@@ -19,9 +19,9 @@
             <table  class="table table-sm">
                 <thead><tr>
                     <th>Product</th>
-                    <th style="width: 70px!important; text-align: right!important;">Quantity</th>
+                    <th style="width: 120px!important; text-align: right!important;">Quantity</th>
                     <th style="width: 80px!important; text-align: right!important;">Precio/U</th>
-                    <th style="width: 50px!important; text-align: right!important;">Costo</th>
+                    <th style="width: 80px!important; text-align: right!important;">Costo</th>
                     <th style="width: 130px!important; text-align: right!important;">SubTV</th>
                     <th style="width: 130px!important; text-align: right!important;">SubTC</th>
                     <th style="width: 120px!important; text-align: right!important;">Margen</th>
@@ -114,7 +114,7 @@
                         <td style="text-align: right!important;"><t t-esc='total_venta' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
                         <td style="text-align: right!important;"><t t-esc='total_costo_bsf' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
                         <td style="text-align: right!important;">
-                            <t t-esc='total_venta - total_costo_bsf' t-options="{'widget': 'float', 'precision': currency_precision}"/> (<t t-if='total_venta != 0'><t t-esc='(total_venta - total_costo_bsf) / total_venta * 100' t-options="{'widget': 'float', 'precision': currency_precision}" /></t><t t-else="">0</t>)% 
+                            <t t-esc='total_venta - total_costo_bsf' t-options="{'widget': 'float', 'precision': currency_precision}"/> (<t t-if='total_venta != 0'><t t-esc='(total_venta - total_costo_bsf) / total_venta * 100' t-options="{'widget': 'float', 'precision': currency_precision}" />%</t><t t-else="">0%</t>)
                         </td>
                     </tr>
                     <tr>
