@@ -24,7 +24,7 @@
                     <th style="width: 80px!important; text-align: right!important;">Costo</th>
                     <th style="width: 130px!important; text-align: right!important;">SubTV</th>
                     <th style="width: 130px!important; text-align: right!important;">SubTC</th>
-                    <th style="width: 120px!important; text-align: right!important;">Margen</th>
+                    <th style="width: 145px!important; text-align: right!important;">Margen</th>
                 </tr></thead>
                 <tbody>
                 <tr t-foreach='products' t-as='line'>
