@@ -19,33 +19,33 @@
             <table  class="table table-sm">
                 <thead><tr>
                     <th>Product</th>
-                    <th>Quantity</th>
-                    <th style="width: 80px!important;">Precio/U</th>
-                    <th style="width: 80px!important;">Costo</th>
-                    <th style="width: 130px!important;">SubTV</th>
-                    <th style="width: 130px!important;">SubTC</th>
-                    <th style="width: 120px!important;">Margen</th>
+                    <th style="width: 40px!important; text-align: right!important;">Quantity</th>
+                    <th style="width: 80px!important; text-align: right!important;">Precio/U</th>
+                    <th style="width: 80px!important; text-align: right!important;">Costo</th>
+                    <th style="width: 130px!important; text-align: right!important;">SubTV</th>
+                    <th style="width: 130px!important; text-align: right!important;">SubTC</th>
+                    <th style="width: 120px!important; text-align: right!important;">Margen</th>
                 </tr></thead>
                 <tbody>
                 <tr t-foreach='products' t-as='line'>
                     <t t-set="internal_reference" t-value="line['code'] and '[%s] ' % line['code'] or ''" />
                     <td><t t-esc="internal_reference" /><t t-esc="line['product_name']" /></td>
-                    <td>
+                    <td style="text-align: right!important;">
                         <t t-esc="line['quantity']" />
                         <t t-if='line["uom"] != "Units"'>
                             <t t-esc='line["uom"]' /> 
                         </t>
                     </td>
-                    <td>
+                    <td style="text-align: right!important;">
                         <t t-esc='line["price_unit"]' t-options="{'widget': 'float', 'precision': currency_precision}"/>
                         <t t-if='line["discount"] != 0'>
                             Disc: <t t-esc='line["discount"]' />%
                         </t>
                     </td>
-                    <td><t t-esc="line['standard_price']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
-                    <td><t t-esc="line['sub_total_venta']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
-                    <td><t t-esc="line['sub_total_costo']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
-                    <td><t t-esc="line['margen']" t-options="{'widget': 'float', 'precision': currency_precision}"/> (<t t-esc="line['margen_porcentaje']" t-options="{'widget': 'float', 'precision': currency_precision}"/> %) </td>
+                    <td style="text-align: right!important;"><t t-esc="line['standard_price']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    <td style="text-align: right!important;"><t t-esc="line['sub_total_venta']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    <td style="text-align: right!important;"><t t-esc="line['sub_total_costo']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    <td style="text-align: right!important;"><t t-esc="line['margen']" t-options="{'widget': 'float', 'precision': currency_precision}"/> (<t t-esc="line['margen_porcentaje']" t-options="{'widget': 'float', 'precision': currency_precision}"/> %) </td>
 
                     <t t-set="total_venta" t-value="total_venta+line['sub_total_venta']" />
                 </tr>
@@ -58,20 +58,20 @@
             <table  class="table table-sm">
                 <thead><tr>
                     <th>Name</th>
-                    <th>Total</th>
-                    <th></th>
+                    <th style="text-align: right!important;">Total</th>
+                    <th style="text-align: right!important;"></th>
                 </tr></thead>
                 <tbody>
                 <tr t-foreach='payments' t-as='payment'>
                     <t t-if="payment['name'] == 'Divisas'">
                         <td><t t-esc="payment['name']" /></td>
-                        <td><t t-esc="payment['total']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
-                        <td>$ <t t-esc="round((payment['total'] / tasa_vigente), 2)" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td style="text-align: right!important;"><t t-esc="payment['total']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td style="text-align: right!important;">$ <t t-esc="round((payment['total'] / tasa_vigente), 2)" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
                     </t>
                     <t t-else="">
                         <td><t t-esc="payment['name']" /></td>
-                        <td><t t-esc="payment['total']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
-                        <td></td>                    
+                        <td style="text-align: right!important;"><t t-esc="payment['total']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td style="text-align: right!important;"></td>                    
                     </t>
                 </tr>
                 </tbody>
@@ -83,14 +83,14 @@
             <table  class="table table-sm">
                 <thead><tr>
                     <th>Name</th>
-                    <th>Tax Amount</th>
-                    <th>Base Amount</th>
+                    <th style="text-align: right!important;">Tax Amount</th>
+                    <th style="text-align: right!important;">Base Amount</th>
                 </tr></thead>
                 <tbody>
                 <tr t-foreach='taxes' t-as='tax'>
                     <td><t t-esc="tax['name']" /></td>
-                    <td><t t-esc="tax['tax_amount']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
-                    <td><t t-esc="tax['base_amount']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    <td style="text-align: right!important;"><t t-esc="tax['tax_amount']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    <td style="text-align: right!important;"><t t-esc="tax['base_amount']" t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
                 </tr>
                 </tbody>
             </table>
@@ -102,42 +102,56 @@
             <table  class="table table-sm">
                 <thead>
                     <tr>
-                        <th style="width: 20px!important;">Moneda</th>
-                        <th>Total Venta</th>
-                        <th>Total Costo</th>
-                        <th>Margen</th>
+                        <th style="width: 30px!important;">Moneda</th>
+                        <th style="text-align: right!important;">Total Venta</th>
+                        <th style="text-align: right!important;">Total Costo</th>
+                        <th style="text-align: right!important;">Margen</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
                         <td>Bs.</td>
-                        <td><t t-esc='total_venta' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
-                        <td><t t-esc='total_costo_bsf' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
-                        <td>
+                        <td style="text-align: right!important;"><t t-esc='total_venta' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td style="text-align: right!important;"><t t-esc='total_costo_bsf' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td style="text-align: right!important;">
                             <t t-esc='total_venta - total_costo_bsf' t-options="{'widget': 'float', 'precision': currency_precision}"/> (<t t-if='total_venta != 0'><t t-esc='(total_venta - total_costo_bsf) / total_venta * 100' t-options="{'widget': 'float', 'precision': currency_precision}" /></t><t t-else="">0</t>)% 
                         </td>
                     </tr>
                     <tr>
                         <td>$</td>
                         <t t-if='tasa_vigente != 0'>
-                            <td><t t-esc='total_venta / tasa_vigente' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                            <td style="text-align: right!important;"><t t-esc='total_venta / tasa_vigente' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
                         </t> 
                         <t t-else="">     
-                            <td>0</td>
+                            <td style="text-align: right!important;">0</td>
                         </t>
-                        <td><t t-esc='total_costo_usd' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
-                        <td>
+                        <td style="text-align: right!important;"><t t-esc='total_costo_usd' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                        <td style="text-align: right!important;">
                             <t t-if='tasa_vigente != 0'>
                                 <t t-esc='(total_venta - total_costo_bsf) / tasa_vigente' t-options="{'widget': 'float', 'precision': currency_precision}"/> (<t t-if='total_venta != 0'><t t-esc='((total_venta - total_costo_bsf) / tasa_vigente) / (total_venta / tasa_vigente) * 100' t-options="{'widget': 'float', 'precision': currency_precision}" /></t><t t-else="">0</t>)%    
                             </t>                        
                         </td>
-                    </tr>  
+                    </tr>                                         
+                </tbody>
+            </table>
+            
+            <h3>Tasa</h3>
+            <table  class="table table-sm">
+                <thead>
                     <tr>
-                        <td>Tasa: $ -> Bs (<t t-esc='tasa_vigente' t-options="{'widget': 'float', 'precision': currency_precision}"/>), Bs->$ (<t t-esc='tasa_vigente_usd' t-options="{'widget': 'float', 'precision': currency_precision}"/>)</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>                                        
+                        <th style="width: 30px!important;">Moneda</th>
+                        <th style="width: 30px!important;">Valor</th>
+                    </tr>
+                </thead>                
+                <tbody>
+                    <tr>
+                        <td>$ -> Bs</td>
+                        <td><t t-esc='tasa_vigente' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    </tr>
+                    <tr>
+                        <td>Bs -> $</td>
+                        <td><t t-esc='tasa_vigente_usd' t-options="{'widget': 'float', 'precision': currency_precision}"/></td>
+                    </tr>                    
                 </tbody>
             </table>
         </div>
