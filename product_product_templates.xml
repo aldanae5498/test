@@ -21,7 +21,7 @@
                             <div class="o_label_extra_data">
                                 <!-- <strong class="o_label_price">REF: $ 3</strong> -->
                                 <t t-if="tasa_vigente > 0">
-                                    <span class="o_label_price" style="font-size: 24px!important; margin-right: 170px!important;">Bs. </span>
+                                    <span class="o_label_price" style="font-size: 24px!important; margin-right: 170px!important; font-weight: bold!important;">Bs. </span>
                                     <!-- 
                                     <strong class="o_label_price" t-options="{'widget': 'monetary', 'label_price': True, 'invisible': True}">
                                         <t t-esc="round((product.list_price * tasa_vigente), 2)"/>
@@ -29,9 +29,12 @@
                                     -->
                                 </t>
                                 <t t-else="">
+                                    <span class="o_label_price" style="font-size: 24px!important; margin-right: 170px!important; font-weight: bold!important;">Bs. </span>
+                                    <!-- 
                                     <strong class="o_label_price" t-options="{'widget': 'monetary', 'label_price': True}">
                                         Bs.:
-                                    </strong>                                    
+                                    </strong>
+                                    -->
                                 </t>  
                             </div>
                             <t t-if="product.is_product_variant">
