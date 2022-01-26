@@ -1363,7 +1363,7 @@ class ReportSaleDetails(models.AbstractModel):
             payments = []
 
         def calcular_total_costo(costo, cantidad):
-            res = costo * cantidad
+            res = costo * cantidad * tasa_vigente
             return round(res, decimales)
 
         def calcular_total_venta(precio_venta, cantidad):
