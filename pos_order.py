@@ -1414,11 +1414,18 @@ class ReportSaleDetails(models.AbstractModel):
             'discount': discount,
             'uom': product.uom_id.name
         } for (product, price_unit, discount), qty in products_sold.items()], key=lambda l: l['product_name'])
+        
+        # ================ Total Venta Bs ================ #
+        total_venta_bsf = 0.0
+        for i in range(len(products)):
+            total_venta_bsf += products[i]['sub_total_venta']
 
+        total_venta_bsf = round(total_venta_bsf, decimales)        
+
+        # ================ Total Costo Bs ================ #            
         total_costo_bsf = 0.0
         for i in range(len(products)):
             total_costo_bsf += products[i]['sub_total_costo']
-
         total_costo_bsf = round(total_costo_bsf, decimales)
         
         total_costo_usd = 0
@@ -1436,7 +1443,9 @@ class ReportSaleDetails(models.AbstractModel):
             'currency_precision': user_currency.decimal_places,
             'total_paid': user_currency.round(total),
             'total_paid_usd': total_paid_usd,
-
+            
+            'total_venta_bsf': total_venta_bsf,
+            
             'total_costo_bsf': total_costo_bsf,
             'total_costo_usd': total_costo_usd,
 
