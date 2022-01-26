@@ -1419,22 +1419,28 @@ class ReportSaleDetails(models.AbstractModel):
             total_costo_bsf += products[i]['sub_total_costo']
 
         total_costo_bsf = round(total_costo_bsf, decimales)
-        total_costo_usd = round((total_costo_bsf / tasa_vigente), decimales)
-
+        
+        total_costo_usd = 0
         tasa_vigente_usd = 0
+        total_paid_usd = 0
+        margen_usd = 0
+        
         if tasa_vigente != 0:
-            tasa_vigente_usd = round((rate_usd/tasa_vigente), decimales)
+            total_costo_usd = round((total_costo_bsf / tasa_vigente), decimales)
+            tasa_vigente_usd = round((rate_usd / tasa_vigente), decimales)
+            total_paid_usd = round((user_currency.round(total) / tasa_vigente), decimales)
+            margen_usd = calcular_margen(total_costo_usd, (user_currency.round(total) / tasa_vigente), False)
 
         return {
             'currency_precision': user_currency.decimal_places,
             'total_paid': user_currency.round(total),
-            'total_paid_usd': round((user_currency.round(total) / tasa_vigente), decimales),
+            'total_paid_usd': total_paid_usd,
 
             'total_costo_bsf': total_costo_bsf,
             'total_costo_usd': total_costo_usd,
 
             'margen_bsf': calcular_margen(total_costo_bsf, user_currency.round(total), False),
-            'margen_usd': calcular_margen(total_costo_usd, (user_currency.round(total) / tasa_vigente), False),
+            'margen_usd': margen_usd,
 
             'margen_total_porcentaje': calcular_porcentaje_margen(total_costo_bsf, user_currency.round(total), False),
 
