@@ -7,7 +7,7 @@ from odoo.tools import ustr
 # Impresora Fiscal:
 import sys
 from . import Tfhka
-from . import serial
+# from . import serial
 import os
 import time
 
@@ -23,6 +23,7 @@ class ImpresoraFiscal(models.Model):
     activo = fields.Boolean(string='Activo', default=True)
 
     # Comprobar conexión:
+    '''
     def probar_conexion(self):
         try:
             puerto = "COM4"
@@ -49,7 +50,7 @@ class ImpresoraFiscal(models.Model):
                 'sticky': False,
             }
         }
- 
+    '''
 
     def documentoNF(self):
         printer = Tfhka.Tfhka()
